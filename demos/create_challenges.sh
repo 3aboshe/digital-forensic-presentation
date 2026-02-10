@@ -2,6 +2,7 @@
 # ==========================================================
 # CyberKhana Workshop — Challenge File Generator
 # Re-run this script anytime to rebuild all demo files
+# Each challenge gets its own folder
 # ==========================================================
 
 set -e
@@ -31,47 +32,45 @@ for img in "$BABY_PATRICK" "$HACKER_PENGUIN" "$MCAFEE" "$PILOT" "$FOLLOW_DREAM" 
   fi
 done
 
-# Clean previous challenge builds (keep source images)
-rm -f "$DEMOS"/baby_patrick.txt "$DEMOS"/hacker_penguin.jpg "$DEMOS"/mcafee_photo.jpg
-rm -f "$DEMOS"/pilot.jpg "$DEMOS"/follow_dream.jpg "$DEMOS"/linux_desktop.png
-rm -f "$DEMOS"/flag.txt "$DEMOS"/hidden_flag.zip
+# Clean previous challenge builds
+rm -rf "$DEMOS"/1_file "$DEMOS"/2_strings "$DEMOS"/3_exiftool "$DEMOS"/4_xxd "$DEMOS"/5_binwalk "$DEMOS"/6_zsteg
 
 # ----------------------------------------------------------
 # CHALLENGE 1: file tool — Wrong extension
-# Image: baby_patrick.JPG renamed to .txt
 # ----------------------------------------------------------
 echo ""
-echo "[+] Challenge 1: baby_patrick.txt (file tool)"
+echo "[+] Challenge 1: 1_file/baby_patrick.txt"
 
-cp "$BABY_PATRICK" "$DEMOS/baby_patrick_tmp.jpg"
-exiftool -overwrite_original -Comment="Khana{dont_trust_extensions}" "$DEMOS/baby_patrick_tmp.jpg" > /dev/null 2>&1
-mv "$DEMOS/baby_patrick_tmp.jpg" "$DEMOS/baby_patrick.txt"
+mkdir -p "$DEMOS/1_file"
+cp "$BABY_PATRICK" "$DEMOS/1_file/baby_patrick_tmp.jpg"
+exiftool -overwrite_original -Comment="Khana{dont_trust_extensions}" "$DEMOS/1_file/baby_patrick_tmp.jpg" > /dev/null 2>&1
+mv "$DEMOS/1_file/baby_patrick_tmp.jpg" "$DEMOS/1_file/baby_patrick.txt"
 
 echo "    Solve: file baby_patrick.txt"
-echo "    Then:  mv baby_patrick.txt baby_patrick_solved.jpg"
+echo "    Then:  cp baby_patrick.txt baby_patrick.jpg"
 echo "    Flag:  Khana{dont_trust_extensions}"
 
 # ----------------------------------------------------------
 # CHALLENGE 2: strings tool — Hidden text in image
-# Image: IMG_6770.JPG (hacker penguin)
 # ----------------------------------------------------------
 echo ""
-echo "[+] Challenge 2: hacker_penguin.jpg (strings tool)"
+echo "[+] Challenge 2: 2_strings/hacker_penguin.jpg"
 
-cp "$HACKER_PENGUIN" "$DEMOS/hacker_penguin.jpg"
-printf '\n--- HIDDEN DATA ---\nKhana{strings_see_everything}\n--- END ---\n' >> "$DEMOS/hacker_penguin.jpg"
+mkdir -p "$DEMOS/2_strings"
+cp "$HACKER_PENGUIN" "$DEMOS/2_strings/hacker_penguin.jpg"
+printf '\n--- HIDDEN DATA ---\nKhana{strings_see_everything}\n--- END ---\n' >> "$DEMOS/2_strings/hacker_penguin.jpg"
 
 echo "    Solve: strings hacker_penguin.jpg | grep Khana"
 echo "    Flag:  Khana{strings_see_everything}"
 
 # ----------------------------------------------------------
 # CHALLENGE 3: exiftool — Metadata with GPS (McAfee story)
-# Image: JohnMacafee.jpg
 # ----------------------------------------------------------
 echo ""
-echo "[+] Challenge 3: mcafee_photo.jpg (exiftool)"
+echo "[+] Challenge 3: 3_exiftool/mcafee_photo.jpg"
 
-cp "$MCAFEE" "$DEMOS/mcafee_photo.jpg"
+mkdir -p "$DEMOS/3_exiftool"
+cp "$MCAFEE" "$DEMOS/3_exiftool/mcafee_photo.jpg"
 exiftool -overwrite_original \
   -Comment="Khana{metadata_reveals_location}" \
   -Author="Vice News" \
@@ -83,59 +82,54 @@ exiftool -overwrite_original \
   -DateTimeOriginal="2012:12:03 14:22:00" \
   -Make="iPhone" \
   -Model="iPhone 4S" \
-  "$DEMOS/mcafee_photo.jpg" > /dev/null 2>&1
+  "$DEMOS/3_exiftool/mcafee_photo.jpg" > /dev/null 2>&1
 
 echo "    Solve: exiftool mcafee_photo.jpg"
 echo "    Look:  GPS Position, Comment, Author, Date"
 echo "    Flag:  Khana{metadata_reveals_location}"
-echo "    Story: In 2012, a Vice journalist posted a photo with McAfee."
-echo "           The EXIF GPS data revealed his location in Guatemala."
 
 # ----------------------------------------------------------
 # CHALLENGE 4: xxd tool — Flag hidden in hex dump
-# Image: IMG_6769.JPG (pilot)
 # ----------------------------------------------------------
 echo ""
-echo "[+] Challenge 4: pilot.jpg (xxd tool)"
+echo "[+] Challenge 4: 4_xxd/pilot.jpg"
 
-cp "$PILOT" "$DEMOS/pilot.jpg"
-printf 'Khana{hex_dump_detective}' >> "$DEMOS/pilot.jpg"
+mkdir -p "$DEMOS/4_xxd"
+cp "$PILOT" "$DEMOS/4_xxd/pilot.jpg"
+printf 'Khana{hex_dump_detective}' >> "$DEMOS/4_xxd/pilot.jpg"
 
 echo "    Solve: xxd pilot.jpg | tail -20"
-echo "    Or:    strings pilot.jpg | tail -5"
 echo "    Flag:  Khana{hex_dump_detective}"
 
 # ----------------------------------------------------------
 # CHALLENGE 5: binwalk — Hidden ZIP inside image
-# Carrier: IMG_6765.JPG (follow that dream)
-# Hidden: masked_cat.JPG + flag.txt inside a ZIP
 # ----------------------------------------------------------
 echo ""
-echo "[+] Challenge 5: follow_dream.jpg (binwalk)"
+echo "[+] Challenge 5: 5_binwalk/follow_dream.jpg"
 
-echo "Khana{binwalk_carved_the_secret}" > "$DEMOS/flag.txt"
-cd "$DEMOS"
+mkdir -p "$DEMOS/5_binwalk"
+echo "Khana{binwalk_carved_the_secret}" > "$DEMOS/5_binwalk/flag.txt"
+cd "$DEMOS/5_binwalk"
+cp "$MASKED_CAT" masked_cat.JPG
 zip -q hidden_flag.zip flag.txt masked_cat.JPG
 cat "$FOLLOW_DREAM" hidden_flag.zip > follow_dream.jpg
-rm -f flag.txt hidden_flag.zip
+rm -f flag.txt hidden_flag.zip masked_cat.JPG
 cd "$BASE_DIR"
 
 echo "    Solve: binwalk follow_dream.jpg"
 echo "    Then:  binwalk -e follow_dream.jpg"
-echo "    Then:  cat _follow_dream.jpg.extracted/flag.txt"
-echo "    Bonus: The masked cat image is hidden inside!"
 echo "    Flag:  Khana{binwalk_carved_the_secret}"
 
 # ----------------------------------------------------------
 # CHALLENGE 6: zsteg — LSB-encoded message in PNG
-# Image: IMG_6766.JPG converted to PNG
 # ----------------------------------------------------------
 echo ""
-echo "[+] Challenge 6: linux_desktop.png (zsteg / LSB)"
+echo "[+] Challenge 6: 6_zsteg/linux_desktop.png"
 
-sips -s format png "$LINUX_DESKTOP" --out "$DEMOS/linux_desktop.png" > /dev/null 2>&1
+mkdir -p "$DEMOS/6_zsteg"
+sips -s format png "$LINUX_DESKTOP" --out "$DEMOS/6_zsteg/linux_desktop.png" > /dev/null 2>&1
 
-python3 - "$DEMOS/linux_desktop.png" << 'PYEOF'
+python3 - "$DEMOS/6_zsteg/linux_desktop.png" << 'PYEOF'
 import sys
 from PIL import Image
 
@@ -172,16 +166,13 @@ echo "    Flag:  Khana{lsb_master_detected}"
 # ----------------------------------------------------------
 echo ""
 echo "================================"
-echo "[*] All 6 challenges created in: $DEMOS/"
+echo "[*] All 6 challenges created:"
 echo ""
-echo "Demo 1 — Basic Forensics:"
-echo "  file baby_patrick.txt"
-echo "  strings hacker_penguin.jpg | grep Khana"
-echo "  exiftool mcafee_photo.jpg"
-echo "  xxd pilot.jpg | tail -20"
-echo ""
-echo "Demo 2 — Advanced Stego:"
-echo "  binwalk follow_dream.jpg && binwalk -e follow_dream.jpg"
-echo "  zsteg linux_desktop.png"
+echo "  1_file/baby_patrick.txt"
+echo "  2_strings/hacker_penguin.jpg"
+echo "  3_exiftool/mcafee_photo.jpg"
+echo "  4_xxd/pilot.jpg"
+echo "  5_binwalk/follow_dream.jpg"
+echo "  6_zsteg/linux_desktop.png"
 echo ""
 echo "[*] Done."
