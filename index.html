@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Steganography — Digital Forensics Workshop</title>
-<!-- flag{check_the_source_code_you_forensic_genius} -->
+<!-- Khana{check_the_source_code_you_forensic_genius} -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -201,7 +201,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 <nav class="dot-nav" id="dotNav"></nav>
 
 <!-- Slide counter -->
-<div class="slide-counter"><span class="current" id="counterCurrent">1</span> / <span id="counterTotal">16</span></div>
+<div class="slide-counter"><span class="current" id="counterCurrent">1</span> / <span id="counterTotal">18</span></div>
 
 <!-- Navigation hint -->
 <div class="nav-hint"><kbd>←</kbd><kbd>→</kbd> navigate <kbd>Space</kbd> next</div>
@@ -354,7 +354,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
         <g class="meta-row glow-field" data-index="3">
           <rect x="62" y="237" width="305" height="24" rx="4" fill="rgba(74,237,196,0.08)" stroke="var(--accent)" stroke-width="1.5" class="comment-glow"/>
           <text x="70" y="254" fill="#4AEDC4" font-family="JetBrains Mono" font-size="10" font-weight="700">Comment</text>
-          <text x="170" y="254" fill="#4AEDC4" font-family="JetBrains Mono" font-size="10" font-weight="700">: flag{hidden_here!}</text>
+          <text x="170" y="254" fill="#4AEDC4" font-family="JetBrains Mono" font-size="10" font-weight="700">: Khana{hidden_here!}</text>
         </g>
       </g>
 
@@ -485,7 +485,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
       <div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">Terminal</span></div>
       <div class="terminal-body">
         <div class="terminal-line"><span class="prompt">$ </span><span class="cmd" data-type-text="strings mystery.png | grep -i flag"></span><span class="cursor" style="display:none">▌</span></div>
-        <div class="terminal-line" style="opacity:0"><span class="flag">flag{this_was_too_easy}</span></div>
+        <div class="terminal-line" style="opacity:0"><span class="flag">Khana{this_was_too_easy}</span></div>
       </div>
     </div>
   </div>
@@ -510,7 +510,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
         <div class="terminal small" id="term-exif-write">
           <div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">Writing metadata</span></div>
           <div class="terminal-body">
-            <div class="terminal-line"><span class="prompt">$ </span><span class="cmd" data-type-text='exiftool -Comment="flag{hidden}" image.jpg'></span><span class="cursor" style="display:none">▌</span></div>
+            <div class="terminal-line"><span class="prompt">$ </span><span class="cmd" data-type-text='exiftool -Comment="Khana{hidden}" image.jpg'></span><span class="cursor" style="display:none">▌</span></div>
           </div>
         </div>
       </div>
@@ -525,7 +525,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
           <div class="terminal-line" style="opacity:0"><span class="output">MIME Type        : image/jpeg</span></div>
           <div class="terminal-line" style="opacity:0"><span class="output">Image Width      : 1920</span></div>
           <div class="terminal-line" style="opacity:0"><span class="output">Image Height     : 1080</span></div>
-          <div class="terminal-line" style="opacity:0"><span class="flag">Comment          : flag{hidden_in_metadata}</span></div>
+          <div class="terminal-line" style="opacity:0"><span class="flag">Comment          : Khana{hidden_in_metadata}</span></div>
         </div>
       </div>
     </div>
@@ -561,9 +561,29 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 8: LSB METHOD -->
+<!-- SLIDE 8: DEMO 1 — BASIC FORENSICS -->
 <!-- ═══════════════════════════════════════ -->
 <section class="slide" id="slide-8">
+<div class="slide-inner" style="text-align:center">
+  <div style="margin-bottom:24px">
+    <span style="font-family:var(--font-mono);font-size:0.85rem;color:var(--accent);letter-spacing:2px;text-transform:uppercase" class="anim-hidden" data-anim="up">Live Demo</span>
+  </div>
+  <h1 class="anim-hidden" data-anim="scale" style="font-size:clamp(3rem,8vw,6rem);color:var(--accent);text-shadow:0 0 40px var(--accent-glow);margin-bottom:16px">DEMO</h1>
+  <h2 class="anim-hidden" data-anim="up" data-delay="0.2" style="font-weight:400;color:var(--text2);margin-bottom:32px">Basic Forensics</h2>
+  <div class="anim-hidden" data-anim="up" data-delay="0.4" style="display:inline-flex;gap:16px;flex-wrap:wrap;justify-content:center">
+    <span style="background:var(--bg2);border:1px solid var(--card-border);border-radius:6px;padding:8px 16px;font-family:var(--font-mono);font-size:0.9rem;color:var(--text)">file</span>
+    <span style="background:var(--bg2);border:1px solid var(--card-border);border-radius:6px;padding:8px 16px;font-family:var(--font-mono);font-size:0.9rem;color:var(--text)">strings</span>
+    <span style="background:var(--bg2);border:1px solid var(--card-border);border-radius:6px;padding:8px 16px;font-family:var(--font-mono);font-size:0.9rem;color:var(--text)">exiftool</span>
+    <span style="background:var(--bg2);border:1px solid var(--card-border);border-radius:6px;padding:8px 16px;font-family:var(--font-mono);font-size:0.9rem;color:var(--text)">xxd</span>
+  </div>
+  <p class="anim-hidden" data-anim="up" data-delay="0.6" style="margin-top:24px;color:var(--text2);font-family:var(--font-mono);font-size:0.8rem">challenge1.txt</p>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 9: LSB METHOD -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-9">
 <div class="slide-inner" style="text-align:center">
   <h2 class="anim-hidden" data-anim="up">The <span class="accent">LSB</span> Method</h2>
   <p class="anim-hidden" data-anim="up" style="margin:0 auto 20px;text-align:center">Least Significant Bit — hiding data in the <strong class="highlight">last bit</strong> of each color channel.</p>
@@ -644,7 +664,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
   <!-- Sub-step 5: Encoding across pixels -->
   <div class="lsb-content" id="lsb-step-5">
     <h3>Encoding a Flag Across Pixels</h3>
-    <p style="font-size:0.9rem;color:var(--text2);margin-bottom:20px">Each pixel hides 3 bits (one per channel). To spell "flag{}" we need many pixels:</p>
+    <p style="font-size:0.9rem;color:var(--text2);margin-bottom:20px">Each pixel hides 3 bits (one per channel). To spell "Khana{}" we need many pixels:</p>
     <div style="font-family:var(--font-mono);font-size:0.85rem;background:var(--code-bg);padding:16px;border-radius:8px;border:1px solid var(--card-border);display:inline-block;text-align:left">
       <div>Pixel 1: <span class="accent">0 1 1</span>  ← bits of 'f' (01100110)</div>
       <div>Pixel 2: <span class="accent">0 0 1</span></div>
@@ -703,9 +723,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 9: TOOL — steghide -->
+<!-- SLIDE 10: TOOL — steghide -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-9">
+<section class="slide" id="slide-10">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">steghide</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:24px">Hides and extracts data using LSB steganography in <strong class="highlight">JPEG and BMP</strong> files. Supports password protection.</p>
@@ -733,9 +753,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 10: TOOL — binwalk -->
+<!-- SLIDE 11: TOOL — binwalk -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-10">
+<section class="slide" id="slide-11">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">binwalk</span> <span style="font-size:0.5em;color:var(--text2)">The File Carver</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:24px">Scans a file for <strong class="highlight">embedded files</strong> hidden inside it. Files can be appended to the end of other files.</p>
@@ -775,9 +795,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 11: TOOL — zsteg -->
+<!-- SLIDE 12: TOOL — zsteg -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-11">
+<section class="slide" id="slide-12">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">zsteg</span> <span style="font-size:0.5em;color:var(--text2)">PNG-Specific LSB</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:24px">Automatically tries <strong class="highlight">many LSB bit/channel combinations</strong> on PNG files. The go-to tool for PNG steganography.</p>
@@ -787,7 +807,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
       <div class="terminal-body">
         <div class="terminal-line"><span class="prompt">$ </span><span class="cmd" data-type-text="zsteg secret.png"></span><span class="cursor" style="display:none">▌</span></div>
         <div class="terminal-line" style="opacity:0"><span class="output">imagedata           .. text: "nothing here"</span></div>
-        <div class="terminal-line" style="opacity:0"><span class="flag">b1,rgb,lsb,xy       .. text: "flag{png_lsb_master}"</span></div>
+        <div class="terminal-line" style="opacity:0"><span class="flag">b1,rgb,lsb,xy       .. text: "Khana{png_lsb_master}"</span></div>
         <div class="terminal-line" style="opacity:0"><span class="output">b2,r,msb,xy         .. text: "garbled data..."</span></div>
         <div class="terminal-line" style="opacity:0"><span class="output">b1,rgba,lsb,xy      .. text: "\x00\x00\x00"</span></div>
       </div>
@@ -801,9 +821,28 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 12: AUDIO STEGANOGRAPHY -->
+<!-- SLIDE 13: DEMO 2 — ADVANCED STEGO -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-12">
+<section class="slide" id="slide-13">
+<div class="slide-inner" style="text-align:center">
+  <div style="margin-bottom:24px">
+    <span style="font-family:var(--font-mono);font-size:0.85rem;color:var(--accent);letter-spacing:2px;text-transform:uppercase" class="anim-hidden" data-anim="up">Live Demo</span>
+  </div>
+  <h1 class="anim-hidden" data-anim="scale" style="font-size:clamp(3rem,8vw,6rem);color:var(--accent);text-shadow:0 0 40px var(--accent-glow);margin-bottom:16px">DEMO</h1>
+  <h2 class="anim-hidden" data-anim="up" data-delay="0.2" style="font-weight:400;color:var(--text2);margin-bottom:32px">Advanced Steganography</h2>
+  <div class="anim-hidden" data-anim="up" data-delay="0.4" style="display:inline-flex;gap:16px;flex-wrap:wrap;justify-content:center">
+    <span style="background:var(--bg2);border:1px solid var(--card-border);border-radius:6px;padding:8px 16px;font-family:var(--font-mono);font-size:0.9rem;color:var(--text)">steghide</span>
+    <span style="background:var(--bg2);border:1px solid var(--card-border);border-radius:6px;padding:8px 16px;font-family:var(--font-mono);font-size:0.9rem;color:var(--text)">binwalk</span>
+    <span style="background:var(--bg2);border:1px solid var(--card-border);border-radius:6px;padding:8px 16px;font-family:var(--font-mono);font-size:0.9rem;color:var(--text)">zsteg</span>
+  </div>
+  <p class="anim-hidden" data-anim="up" data-delay="0.6" style="margin-top:24px;color:var(--text2);font-family:var(--font-mono);font-size:0.8rem">challenge2.jpg &middot; challenge3.jpg &middot; challenge4.png</p>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 14: AUDIO STEGANOGRAPHY -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-14">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Audio <span class="accent">Steganography</span></h2>
   <div class="split">
@@ -850,9 +889,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 13: WHERE CAN SECRETS HIDE -->
+<!-- SLIDE 15: WHERE CAN SECRETS HIDE -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-13">
+<section class="slide" id="slide-15">
 <div class="slide-inner" style="text-align:center">
   <h2 class="anim-hidden" data-anim="up">Where Can <span class="accent">Secrets</span> Hide?</h2>
   <p class="anim-hidden" data-anim="up" style="margin:0 auto 30px;text-align:center">Four main hiding spots forensic investigators check:</p>
@@ -894,9 +933,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 14: CTF METHODOLOGY -->
+<!-- SLIDE 16: CTF METHODOLOGY -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-14">
+<section class="slide" id="slide-16">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">CTF Investigation <span class="accent">Methodology</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:20px">Follow this pipeline on <strong class="highlight">every stego challenge</strong>:</p>
@@ -909,7 +948,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
     <div class="pipeline-node" data-step="4">binwalk</div><span class="pipeline-arrow" data-step="4">→</span>
     <div class="pipeline-node" data-step="5">steghide</div><span class="pipeline-arrow" data-step="5">→</span>
     <div class="pipeline-node" data-step="6">zsteg</div><span class="pipeline-arrow" data-step="6">→</span>
-    <div class="pipeline-node" data-step="7" style="border-color:var(--accent);color:var(--accent)">flag{found!}</div>
+    <div class="pipeline-node" data-step="7" style="border-color:var(--accent);color:var(--accent)">Khana{found!}</div>
   </div>
   <!-- Checklist -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:24px;max-width:900px">
@@ -930,9 +969,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 15: CTA -->
+<!-- SLIDE 17: CTA -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-15">
+<section class="slide" id="slide-17">
 <div class="slide-inner" style="text-align:center">
   <div class="anim-hidden-scale" data-anim="scale">
     <!-- Unlock SVG -->
@@ -956,15 +995,15 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- Easter egg for curious students -->
-<!-- Congratulations! You found the first flag: flag{view_source_master} -->
+<!-- Congratulations! You found the first flag: Khana{view_source_master} -->
 <!-- There might be more hidden secrets in this page... can you find them? -->
-<div style="display:none" aria-hidden="true" data-flag="flag{inspect_element_pro}"></div>
+<div style="display:none" aria-hidden="true" data-flag="Khana{inspect_element_pro}"></div>
 
 <script>
 gsap.registerPlugin(TextPlugin);
 
 // ─── STATE ───
-const TOTAL = 16;
+const TOTAL = 18;
 let current = 0;
 let transitioning = false;
 let lsbStep = 0;
@@ -975,7 +1014,7 @@ const animatedSlides = new Set();
 // ─── PARTICLES ───
 (function initParticles() {
   const c = document.getElementById('particles');
-  const chars = '01001010 FF D8 FF 89504E47 flag{ } A3F2 0x00 1101';
+  const chars = '01001010 FF D8 FF 89504E47 Khana{ } A3F2 0x00 1101';
   for (let i = 0; i < 25; i++) {
     const p = document.createElement('div');
     p.className = 'bg-particle';
@@ -988,7 +1027,7 @@ const animatedSlides = new Set();
 })();
 
 // ─── DOT NAV ───
-const dotLabels = ['Hero','Steganography','File Anatomy','Extensions','file','strings','exiftool','xxd','LSB Method','steghide','binwalk','zsteg','Audio Stego','Hiding Spots','Methodology','Challenge'];
+const dotLabels = ['Hero','Steganography','File Anatomy','Extensions','file','strings','exiftool','xxd','Demo','LSB Method','steghide','binwalk','zsteg','Demo','Audio Stego','Hiding Spots','Methodology','Challenge'];
 (function initDots() {
   const nav = document.getElementById('dotNav');
   for (let i = 0; i < TOTAL; i++) {
@@ -1035,7 +1074,7 @@ function goToSlide(n) {
   const inSlide = slides[n];
 
   // Reset LSB step when leaving slide 8
-  if (current === 8) lsbStep = 0;
+  if (current === 9) lsbStep = 0;
 
   // Kill all GSAP tweens on the outgoing slide to avoid conflicts
   const outChildren = outSlide.querySelectorAll('*');
@@ -1068,7 +1107,7 @@ function goToSlide(n) {
 
 function nextSlide() {
   // Handle LSB sub-steps
-  if (current === 8 && lsbStep < LSB_STEPS - 1) {
+  if (current === 9 && lsbStep < LSB_STEPS - 1) {
     lsbStep++;
     showLsbStep(lsbStep);
     return;
@@ -1078,7 +1117,7 @@ function nextSlide() {
 
 function prevSlide() {
   // Handle LSB sub-steps backwards
-  if (current === 8 && lsbStep > 0) {
+  if (current === 9 && lsbStep > 0) {
     lsbStep--;
     showLsbStep(lsbStep);
     return;
@@ -1277,7 +1316,7 @@ const slideAnimations = {
     });
     gsap.to(slide.querySelector('.sig-result'), { opacity: 1, duration: 0.4, delay: 2 });
   },
-  8: function(slide) {
+  9: function(slide) {
     // LSB: show first step
     lsbStep = 0;
     showLsbStep(0);
@@ -1289,13 +1328,13 @@ const slideAnimations = {
     const zp = document.getElementById('zoomedPixel');
     if (zp) zp.style.background = 'rgb(210,180,76)';
   },
-  12: function(slide) {
+  14: function(slide) {
     // Audio: draw waveform, reveal flag
     animateGenericElements(slide);
     gsap.to(slide.querySelector('.spectro-wave'), { strokeDashoffset: 0, duration: 2, delay: 0.5, ease: 'power2.inOut' });
     gsap.to(slide.querySelector('.spectro-flag'), { opacity: 0.7, duration: 1, delay: 2.5, ease: 'power2.out' });
   },
-  14: function(slide) {
+  16: function(slide) {
     // Pipeline: light up nodes sequentially
     animateGenericElements(slide);
     const nodes = slide.querySelectorAll('.pipeline-node');
@@ -1307,7 +1346,7 @@ const slideAnimations = {
       gsap.to(a, { className: '+=lit', duration: 0.01, delay: 1.65 + i * 0.3 });
     });
   },
-  15: function(slide) {
+  17: function(slide) {
     // CTA: draw lock, then unlock
     animateGenericElements(slide);
     const body = slide.querySelector('.cta-lock-body');
