@@ -743,43 +743,15 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
     <h3>Real-World Example</h3>
     <div class="landscape-compare">
       <div class="landscape-frame">
-        <svg width="320" height="200" viewBox="0 0 320 200">
-          <defs>
-            <linearGradient id="sky1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#0f1729"/><stop offset="100%" style="stop-color:#1a1a3e"/></linearGradient>
-            <linearGradient id="water1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#0c1a30"/><stop offset="100%" style="stop-color:#081420"/></linearGradient>
-          </defs>
-          <rect width="320" height="200" fill="url(#sky1)" rx="6"/>
-          <circle cx="260" cy="40" r="20" fill="#1e293b" opacity="0.6"/>
-          <circle cx="50" cy="25" r="1.5" fill="white" opacity="0.7"/><circle cx="120" cy="15" r="1" fill="white" opacity="0.5"/><circle cx="200" cy="35" r="1.2" fill="white" opacity="0.6"/><circle cx="280" cy="20" r="0.8" fill="white" opacity="0.4"/><circle cx="160" cy="45" r="1" fill="white" opacity="0.3"/>
-          <polygon points="0,140 50,80 100,120 140,70 200,130 240,90 300,110 320,100 320,200 0,200" fill="#0f172a"/>
-          <polygon points="0,160 80,100 160,140 200,110 260,130 320,120 320,200 0,200" fill="#1e293b"/>
-          <rect y="155" width="320" height="45" fill="url(#water1)" opacity="0.8"/>
-          <line x1="60" y1="170" x2="100" y2="170" stroke="rgba(74,237,196,0.1)" stroke-width="0.5"/>
-          <line x1="150" y1="175" x2="200" y2="175" stroke="rgba(74,237,196,0.08)" stroke-width="0.5"/>
-          <line x1="220" y1="168" x2="280" y2="168" stroke="rgba(74,237,196,0.06)" stroke-width="0.5"/>
-        </svg>
+        <img src="demos/IMG_6766.JPG" alt="Original image" style="width:320px;height:200px;object-fit:cover;border-radius:6px;display:block">
         <p>Original Image</p>
       </div>
       <div class="landscape-frame">
-        <svg width="320" height="200" viewBox="0 0 320 200">
-          <defs>
-            <linearGradient id="sky2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#0f1729"/><stop offset="100%" style="stop-color:#1a1a3e"/></linearGradient>
-            <linearGradient id="water2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#0c1a30"/><stop offset="100%" style="stop-color:#081420"/></linearGradient>
-          </defs>
-          <rect width="320" height="200" fill="url(#sky2)" rx="6"/>
-          <circle cx="260" cy="40" r="20" fill="#1e293b" opacity="0.6"/>
-          <circle cx="50" cy="25" r="1.5" fill="white" opacity="0.7"/><circle cx="120" cy="15" r="1" fill="white" opacity="0.5"/><circle cx="200" cy="35" r="1.2" fill="white" opacity="0.6"/><circle cx="280" cy="20" r="0.8" fill="white" opacity="0.4"/><circle cx="160" cy="45" r="1" fill="white" opacity="0.3"/>
-          <polygon points="0,140 50,80 100,120 140,70 200,130 240,90 300,110 320,100 320,200 0,200" fill="#0f172a"/>
-          <polygon points="0,160 80,100 160,140 200,110 260,130 320,120 320,200 0,200" fill="#1e293b"/>
-          <rect y="155" width="320" height="45" fill="url(#water2)" opacity="0.8"/>
-          <line x1="60" y1="170" x2="100" y2="170" stroke="rgba(74,237,196,0.1)" stroke-width="0.5"/>
-          <line x1="150" y1="175" x2="200" y2="175" stroke="rgba(74,237,196,0.08)" stroke-width="0.5"/>
-          <line x1="220" y1="168" x2="280" y2="168" stroke="rgba(74,237,196,0.06)" stroke-width="0.5"/>
-        </svg>
-        <p>Stego Image <span class="accent">(contains hidden flag!)</span></p>
+        <img src="demos/6_zsteg/linux_desktop.png" alt="Stego image with hidden flag" style="width:320px;height:200px;object-fit:cover;border-radius:6px;display:block">
+        <p>Stego Image <span class="accent">(contains Khana{lsb_master_detected})</span></p>
       </div>
     </div>
-    <p style="font-size:0.95rem;color:var(--accent);margin-top:16px;font-weight:600">Identical to the human eye — but one holds a secret.</p>
+    <p style="font-size:0.95rem;color:var(--accent);margin-top:16px;font-weight:600">Identical to the human eye — but one holds a secret encoded in its pixels.</p>
     <p class="substep-indicator">Step 7/7 — Press → for next slide</p>
   </div>
 </div>
