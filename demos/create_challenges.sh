@@ -8,93 +8,139 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 BASE_DIR="$(dirname "$SCRIPT_DIR")"
 DEMOS="$SCRIPT_DIR"
-SRC_IMG="$BASE_DIR/JohnMacafee.jpg"
 
 echo "[*] CyberKhana Challenge Builder"
 echo "================================"
 
-if [ ! -f "$SRC_IMG" ]; then
-  echo "[!] Source image not found: $SRC_IMG"
-  echo "    Download a JPEG image and save it as steganography.jpg in the project root."
-  exit 1
-fi
+# ----------------------------------------------------------
+# Source images (must exist in demos/)
+# ----------------------------------------------------------
+BABY_PATRICK="$DEMOS/baby_patrick.JPG"
+HACKER_PENGUIN="$DEMOS/IMG_6770.JPG"
+MCAFEE="$BASE_DIR/JohnMacafee.jpg"
+PILOT="$DEMOS/IMG_6769.JPG"
+FOLLOW_DREAM="$DEMOS/IMG_6765.JPG"
+MASKED_CAT="$DEMOS/masked_cat.JPG"
+LINUX_DESKTOP="$DEMOS/IMG_6766.JPG"
 
-# Clean previous builds
-rm -f "$DEMOS"/challenge* "$DEMOS"/secret.txt "$DEMOS"/flag.txt "$DEMOS"/lsb_encode.py
+# Verify source images exist
+for img in "$BABY_PATRICK" "$HACKER_PENGUIN" "$MCAFEE" "$PILOT" "$FOLLOW_DREAM" "$MASKED_CAT" "$LINUX_DESKTOP"; do
+  if [ ! -f "$img" ]; then
+    echo "[!] Missing source image: $img"
+    exit 1
+  fi
+done
+
+# Clean previous challenge builds (keep source images)
+rm -f "$DEMOS"/baby_patrick.txt "$DEMOS"/hacker_penguin.jpg "$DEMOS"/mcafee_photo.jpg
+rm -f "$DEMOS"/pilot.jpg "$DEMOS"/follow_dream.jpg "$DEMOS"/linux_desktop.png
+rm -f "$DEMOS"/flag.txt "$DEMOS"/hidden_flag.zip
 
 # ----------------------------------------------------------
-# CHALLENGE 1: Wrong extension + metadata + hidden strings
-# Tools: file, strings, exiftool, xxd
+# CHALLENGE 1: file tool — Wrong extension
+# Image: baby_patrick.JPG renamed to .txt
 # ----------------------------------------------------------
-echo "[+] Building challenge1.txt (file / strings / exiftool / xxd demo)..."
+echo ""
+echo "[+] Challenge 1: baby_patrick.txt (file tool)"
 
-# Write metadata while still a .jpg, then rename to .txt
-cp "$SRC_IMG" "$DEMOS/challenge1.jpg"
-exiftool -overwrite_original -Comment="Khana{metadata_is_never_safe}" "$DEMOS/challenge1.jpg" > /dev/null 2>&1
-mv "$DEMOS/challenge1.jpg" "$DEMOS/challenge1.txt"
-printf '\n\n--- HIDDEN DATA ---\nKhana{strings_will_find_me}\n--- END ---\n' >> "$DEMOS/challenge1.txt"
+cp "$BABY_PATRICK" "$DEMOS/baby_patrick_tmp.jpg"
+exiftool -overwrite_original -Comment="Khana{dont_trust_extensions}" "$DEMOS/baby_patrick_tmp.jpg" > /dev/null 2>&1
+mv "$DEMOS/baby_patrick_tmp.jpg" "$DEMOS/baby_patrick.txt"
 
-echo "    -> file challenge1.txt          (reveals JPEG)"
-echo "    -> strings challenge1.txt       (finds Khana{strings_will_find_me})"
-echo "    -> exiftool challenge1.txt      (Comment: Khana{metadata_is_never_safe})"
-echo "    -> xxd challenge1.txt | head    (shows FF D8 FF header)"
+echo "    Solve: file baby_patrick.txt"
+echo "    Then:  mv baby_patrick.txt baby_patrick_solved.jpg"
+echo "    Flag:  Khana{dont_trust_extensions}"
 
 # ----------------------------------------------------------
-# CHALLENGE 2: Steghide-embedded secret
-# Tools: steghide
+# CHALLENGE 2: strings tool — Hidden text in image
+# Image: IMG_6770.JPG (hacker penguin)
 # ----------------------------------------------------------
-echo "[+] Building challenge2.jpg (steghide demo)..."
+echo ""
+echo "[+] Challenge 2: hacker_penguin.jpg (strings tool)"
 
-cp "$SRC_IMG" "$DEMOS/challenge2.jpg"
-echo "Khana{steghide_password_cracked}" > "$DEMOS/secret.txt"
+cp "$HACKER_PENGUIN" "$DEMOS/hacker_penguin.jpg"
+printf '\n--- HIDDEN DATA ---\nKhana{strings_see_everything}\n--- END ---\n' >> "$DEMOS/hacker_penguin.jpg"
 
-if command -v steghide &> /dev/null; then
-  steghide embed -cf "$DEMOS/challenge2.jpg" -ef "$DEMOS/secret.txt" -p "workshop" -f > /dev/null 2>&1
-  rm "$DEMOS/secret.txt"
-  echo "    -> steghide extract -sf challenge2.jpg -p \"workshop\""
-else
-  echo "    [!] steghide not installed — embedding via raw append (demo-only)"
-  printf '\xFF\xFE' >> "$DEMOS/challenge2.jpg"
-  cat "$DEMOS/secret.txt" >> "$DEMOS/challenge2.jpg"
-  rm "$DEMOS/secret.txt"
-  echo "    -> steghide extract -sf challenge2.jpg -p \"workshop\""
-  echo "    NOTE: Install steghide for proper LSB embedding. Current file uses appended data."
-fi
+echo "    Solve: strings hacker_penguin.jpg | grep Khana"
+echo "    Flag:  Khana{strings_see_everything}"
 
 # ----------------------------------------------------------
-# CHALLENGE 3: Hidden ZIP inside JPEG
-# Tools: binwalk
+# CHALLENGE 3: exiftool — Metadata with GPS (McAfee story)
+# Image: JohnMacafee.jpg
 # ----------------------------------------------------------
-echo "[+] Building challenge3.jpg (binwalk demo)..."
+echo ""
+echo "[+] Challenge 3: mcafee_photo.jpg (exiftool)"
+
+cp "$MCAFEE" "$DEMOS/mcafee_photo.jpg"
+exiftool -overwrite_original \
+  -Comment="Khana{metadata_reveals_location}" \
+  -Author="Vice News" \
+  -Description="Interview with subject — location undisclosed" \
+  -GPSLatitude="14.6349" \
+  -GPSLatitudeRef="N" \
+  -GPSLongitude="90.5069" \
+  -GPSLongitudeRef="W" \
+  -DateTimeOriginal="2012:12:03 14:22:00" \
+  -Make="iPhone" \
+  -Model="iPhone 4S" \
+  "$DEMOS/mcafee_photo.jpg" > /dev/null 2>&1
+
+echo "    Solve: exiftool mcafee_photo.jpg"
+echo "    Look:  GPS Position, Comment, Author, Date"
+echo "    Flag:  Khana{metadata_reveals_location}"
+echo "    Story: In 2012, a Vice journalist posted a photo with McAfee."
+echo "           The EXIF GPS data revealed his location in Guatemala."
+
+# ----------------------------------------------------------
+# CHALLENGE 4: xxd tool — Flag hidden in hex dump
+# Image: IMG_6769.JPG (pilot)
+# ----------------------------------------------------------
+echo ""
+echo "[+] Challenge 4: pilot.jpg (xxd tool)"
+
+cp "$PILOT" "$DEMOS/pilot.jpg"
+printf 'Khana{hex_dump_detective}' >> "$DEMOS/pilot.jpg"
+
+echo "    Solve: xxd pilot.jpg | tail -20"
+echo "    Or:    strings pilot.jpg | tail -5"
+echo "    Flag:  Khana{hex_dump_detective}"
+
+# ----------------------------------------------------------
+# CHALLENGE 5: binwalk — Hidden ZIP inside image
+# Carrier: IMG_6765.JPG (follow that dream)
+# Hidden: masked_cat.JPG + flag.txt inside a ZIP
+# ----------------------------------------------------------
+echo ""
+echo "[+] Challenge 5: follow_dream.jpg (binwalk)"
 
 echo "Khana{binwalk_carved_the_secret}" > "$DEMOS/flag.txt"
 cd "$DEMOS"
-zip -q hidden_flag.zip flag.txt
-cat "$SRC_IMG" hidden_flag.zip > challenge3.jpg
+zip -q hidden_flag.zip flag.txt masked_cat.JPG
+cat "$FOLLOW_DREAM" hidden_flag.zip > follow_dream.jpg
 rm -f flag.txt hidden_flag.zip
 cd "$BASE_DIR"
 
-echo "    -> binwalk challenge3.jpg       (finds ZIP at offset)"
-echo "    -> binwalk -e challenge3.jpg     (extracts hidden ZIP)"
-echo "    -> cat _challenge3.jpg.extracted/flag.txt"
+echo "    Solve: binwalk follow_dream.jpg"
+echo "    Then:  binwalk -e follow_dream.jpg"
+echo "    Then:  cat _follow_dream.jpg.extracted/flag.txt"
+echo "    Bonus: The masked cat image is hidden inside!"
+echo "    Flag:  Khana{binwalk_carved_the_secret}"
 
 # ----------------------------------------------------------
-# CHALLENGE 4: PNG with LSB-hidden message
-# Tools: zsteg
+# CHALLENGE 6: zsteg — LSB-encoded message in PNG
+# Image: IMG_6766.JPG converted to PNG
 # ----------------------------------------------------------
-echo "[+] Building challenge4.png (zsteg / LSB demo)..."
+echo ""
+echo "[+] Challenge 6: linux_desktop.png (zsteg / LSB)"
 
-# Convert JPEG to PNG first
-sips -s format png "$SRC_IMG" --out "$DEMOS/challenge4.png" > /dev/null 2>&1
+sips -s format png "$LINUX_DESKTOP" --out "$DEMOS/linux_desktop.png" > /dev/null 2>&1
 
-# Encode message in LSB using Python
-python3 - "$DEMOS/challenge4.png" << 'PYEOF'
+python3 - "$DEMOS/linux_desktop.png" << 'PYEOF'
 import sys
 from PIL import Image
 
 img_path = sys.argv[1]
 message = "Khana{lsb_master_detected}"
-# Add null terminator
 msg_bits = ''.join(format(ord(c), '08b') for c in message) + '00000000'
 
 img = Image.open(img_path).convert('RGB')
@@ -117,27 +163,25 @@ for r, g, b in pixels:
 img_out = Image.new('RGB', img.size)
 img_out.putdata(new_pixels)
 img_out.save(img_path)
-print(f"    -> Encoded {len(message)} chars in LSB of {img.size[0]}x{img.size[1]} PNG")
+print(f"    Encoded {len(message)} chars in LSB of {img.size[0]}x{img.size[1]} PNG")
 PYEOF
 
-echo "    -> zsteg challenge4.png         (finds Khana{lsb_master_detected})"
+echo "    Solve: zsteg linux_desktop.png"
+echo "    Flag:  Khana{lsb_master_detected}"
 
 # ----------------------------------------------------------
 echo ""
 echo "================================"
-echo "[*] All challenges created in: $DEMOS/"
+echo "[*] All 6 challenges created in: $DEMOS/"
 echo ""
-echo "Demo 1 commands (Basic Forensics):"
-echo "  cd demos"
-echo "  file challenge1.txt"
-echo "  strings challenge1.txt | grep Khana"
-echo "  exiftool challenge1.txt | grep -i comment"
-echo "  xxd challenge1.txt | head"
+echo "Demo 1 — Basic Forensics:"
+echo "  file baby_patrick.txt"
+echo "  strings hacker_penguin.jpg | grep Khana"
+echo "  exiftool mcafee_photo.jpg"
+echo "  xxd pilot.jpg | tail -20"
 echo ""
-echo "Demo 2 commands (Advanced Stego):"
-echo "  steghide extract -sf challenge2.jpg -p \"workshop\""
-echo "  binwalk challenge3.jpg"
-echo "  binwalk -e challenge3.jpg"
-echo "  zsteg challenge4.png"
+echo "Demo 2 — Advanced Stego:"
+echo "  binwalk follow_dream.jpg && binwalk -e follow_dream.jpg"
+echo "  zsteg linux_desktop.png"
 echo ""
 echo "[*] Done."
