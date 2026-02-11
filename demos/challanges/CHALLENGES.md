@@ -61,6 +61,6 @@ You found this image on an old hard drive buried in a Minecraft world backup. Wh
 ## 6. Never Gonna Give You Up
 **File:** `rickroll.wav`
 **Difficulty:** Medium | **Points:** 250
-**Flag:** `khana{sp3ctr0gr4m_r1ckr0ll}`
+**Flag:** `khana{r1ck}`
 
 We intercepted an audio transmission from a suspect's burner phone. At first it just sounds like a familiar song — but our analysts believe there's more to it than meets the ear. Sometimes secrets hide in frequencies humans can't hear. You'll need to see the sound, not just listen to it.

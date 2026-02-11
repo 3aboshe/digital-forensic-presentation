@@ -353,17 +353,17 @@ The hint says to view the spectrogram — the frequency representation of the au
 Open the file in Audacity:
 1. **File → Open** → select `rickroll.wav`
 2. Click the track name dropdown (▼) → **Spectrogram**
-3. Look at the **14–20 kHz range** (top of the spectrogram)
+3. Look at the **8–20 kHz range** — large bold text fills the upper half of the spectrogram
 
-You'll see the flag written in the high frequencies:
+You'll see the flag written clearly in the high frequencies:
 
 ```
-khana{sp3ctr0gr4m_r1ckr0ll}
+KHANA{R1CK}
 ```
 
-The text is embedded as sine waves at frequencies above human hearing range (~14–20kHz), making it invisible to the ear but clearly visible on a spectrogram display.
+The text is embedded as bold, scaled-up sine waves across the 8–20kHz range. Each character is thick and unmissable on the spectrogram.
 
-**Flag:** `khana{sp3ctr0gr4m_r1ckr0ll}`
+**Flag:** `khana{r1ck}`
 
 **Lesson:** Audio steganography can hide data in frequencies humans can't hear. Spectrogram analysis is a key tool in audio forensics — it reveals patterns in the frequency domain that are completely invisible when just listening. This technique is used in real-world CTFs and has been found in actual malware communications.
 
@@ -378,4 +378,4 @@ The text is embedded as sine waves at frequencies above human hearing range (~14
 | 3 | `creation.png` | Easy | 150 | `zsteg` | `khana{z5t3g_p1x3l_m4st3r}` |
 | 4 | `gamer_cat.jpg` | Medium | 300 | `exiftool` + ROT13 + `binwalk` + `unzip` | `khana{l4y3r3d_f0r3ns1cs_pr0}` |
 | 5 | `deep_cave.jpg` | Hard | 500 | `exiftool` + `strings` + hex + `steghide` + `git` | `khana{d33p_c4v3_expl0r3r}` |
-| 6 | `rickroll.wav` | Medium | 250 | `strings` + spectrogram viewer | `khana{sp3ctr0gr4m_r1ckr0ll}` |
+| 6 | `rickroll.wav` | Medium | 250 | `strings` + spectrogram viewer | `khana{r1ck}` |
