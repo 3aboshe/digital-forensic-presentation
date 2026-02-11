@@ -203,7 +203,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 <nav class="dot-nav" id="dotNav"></nav>
 
 <!-- Slide counter -->
-<div class="slide-counter"><span class="current" id="counterCurrent">1</span> / <span id="counterTotal">18</span></div>
+<div class="slide-counter"><span class="current" id="counterCurrent">1</span> / <span id="counterTotal">19</span></div>
 
 <!-- Navigation hint -->
 <div class="nav-hint"><kbd>←</kbd><kbd>→</kbd> navigate <kbd>Space</kbd> next</div>
@@ -491,9 +491,46 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 4: TOOL — file -->
+<!-- SLIDE 4: HIDDEN FILES (DOTFILES) -->
 <!-- ═══════════════════════════════════════ -->
 <section class="slide" id="slide-4">
+<div class="slide-inner">
+  <h2 class="anim-hidden" data-anim="up">Hidden <span class="accent">Files</span></h2>
+  <p class="anim-hidden" data-anim="up" style="margin-bottom:20px">On Linux and macOS, any file starting with a <strong class="highlight">dot (.)</strong> is hidden from normal directory listings. You won't see it unless you know to look.</p>
+  <div class="split" style="margin-bottom:16px">
+    <div class="split-left anim-hidden" data-anim="left" data-delay="0.15">
+      <div class="terminal" id="term-ls">
+        <div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">Terminal</span></div>
+        <div class="terminal-body">
+          <div class="terminal-line"><span class="prompt">$ </span><span class="cmd" data-type-text="ls"></span><span class="cursor" style="display:none">▌</span></div>
+          <div class="terminal-line" style="opacity:0"><span class="output">image.jpg    notes.txt    report.pdf</span></div>
+          <div class="terminal-line" style="opacity:0"><span class="output" style="color:var(--text2);font-size:0.8em;margin-top:4px">Nothing suspicious here... or is there?</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="split-right anim-hidden" data-anim="right" data-delay="0.3">
+      <div class="terminal" id="term-ls-la">
+        <div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">Terminal</span></div>
+        <div class="terminal-body">
+          <div class="terminal-line"><span class="prompt">$ </span><span class="cmd" data-type-text="ls -la"></span><span class="cursor" style="display:none">▌</span></div>
+          <div class="terminal-line" style="opacity:0"><span class="output">image.jpg    notes.txt    report.pdf</span></div>
+          <div class="terminal-line" style="opacity:0"><span class="flag">.secret_flag.txt</span></div>
+          <div class="terminal-line" style="opacity:0"><span class="flag">.hidden_data</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pro-tip anim-hidden" data-anim="up" data-delay="0.4">
+    <span class="pro-tip-icon" style="color:var(--accent);font-family:var(--font-mono);font-weight:700">&gt;</span>
+    <div class="pro-tip-text"><strong>Pro tip:</strong> Always use <code style="font-family:var(--font-mono);color:var(--accent)">ls -la</code> in forensics — the <code style="font-family:var(--font-mono);color:var(--accent)">-a</code> flag reveals hidden files that suspects might use to stash evidence.</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 5: TOOL — file -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-5">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">file</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:24px">Reads the magic bytes to determine a file's <strong class="highlight">true type</strong> — regardless of what the extension says.</p>
@@ -514,9 +551,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 5: TOOL — strings -->
+<!-- SLIDE 6: TOOL — strings -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-5">
+<section class="slide" id="slide-6">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">strings</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:16px">Scans a binary file and extracts every sequence of <strong class="highlight">printable ASCII characters</strong> (4+ characters by default). Any readable text buried inside images, executables, or documents — <code style="font-family:var(--font-mono);color:var(--accent)">strings</code> will find it.</p>
@@ -560,9 +597,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 6: TOOL — exiftool -->
+<!-- SLIDE 7: TOOL — exiftool -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-6">
+<section class="slide" id="slide-7">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">exiftool</span> <span style="font-size:0.5em;color:var(--text2)">The Magnifier</span></h2>
   <div class="split">
@@ -597,9 +634,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 7: TOOL — xxd -->
+<!-- SLIDE 8: TOOL — xxd -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-7">
+<section class="slide" id="slide-8">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">xxd</span> / hexdump</h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:24px">When you need to see the <strong class="highlight">raw bytes</strong> of a file. The hex dump shows both hex values and their ASCII representation.</p>
@@ -624,9 +661,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 8: DEMO 1 — BASIC FORENSICS -->
+<!-- SLIDE 9: DEMO 1 — BASIC FORENSICS -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-8">
+<section class="slide" id="slide-9">
 <div class="slide-inner" style="text-align:center">
   <div style="margin-bottom:24px">
     <span style="font-family:var(--font-mono);font-size:0.85rem;color:var(--accent);letter-spacing:2px;text-transform:uppercase" class="anim-hidden" data-anim="up">Live Demo</span>
@@ -644,9 +681,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 9: LSB METHOD -->
+<!-- SLIDE 10: LSB METHOD -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-9">
+<section class="slide" id="slide-10">
 <div class="slide-inner" style="text-align:center">
   <h2 class="anim-hidden" data-anim="up">The <span class="accent">LSB</span> Method</h2>
   <p class="anim-hidden" data-anim="up" style="margin:0 auto 20px;text-align:center">Least Significant Bit — hiding data in the <strong class="highlight">last bit</strong> of each color channel.</p>
@@ -758,9 +795,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 10: TOOL — steghide -->
+<!-- SLIDE 11: TOOL — steghide -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-10">
+<section class="slide" id="slide-11">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">steghide</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:24px">Hides and extracts data using LSB steganography in <strong class="highlight">JPEG and BMP</strong> files. Supports password protection.</p>
@@ -788,9 +825,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 11: TOOL — binwalk -->
+<!-- SLIDE 12: TOOL — binwalk -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-11">
+<section class="slide" id="slide-12">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">binwalk</span> <span style="font-size:0.5em;color:var(--text2)">The File Carver</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:24px">Scans a file for <strong class="highlight">embedded files</strong> hidden inside it. Files can be appended to the end of other files.</p>
@@ -830,9 +867,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 12: TOOL — zsteg -->
+<!-- SLIDE 13: TOOL — zsteg -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-12">
+<section class="slide" id="slide-13">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Tool: <span class="accent">zsteg</span> <span style="font-size:0.5em;color:var(--text2)">PNG-Specific LSB</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:24px">Automatically tries <strong class="highlight">many LSB bit/channel combinations</strong> on PNG files. The go-to tool for PNG steganography.</p>
@@ -856,9 +893,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 13: DEMO 2 — ADVANCED STEGO -->
+<!-- SLIDE 14: DEMO 2 — ADVANCED STEGO -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-13">
+<section class="slide" id="slide-14">
 <div class="slide-inner" style="text-align:center">
   <div style="margin-bottom:24px">
     <span style="font-family:var(--font-mono);font-size:0.85rem;color:var(--accent);letter-spacing:2px;text-transform:uppercase" class="anim-hidden" data-anim="up">Live Demo</span>
@@ -874,9 +911,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 14: AUDIO STEGANOGRAPHY -->
+<!-- SLIDE 15: AUDIO STEGANOGRAPHY -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-14">
+<section class="slide" id="slide-15">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">Audio <span class="accent">Steganography</span></h2>
   <div class="split">
@@ -923,9 +960,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 15: WHERE CAN SECRETS HIDE -->
+<!-- SLIDE 16: WHERE CAN SECRETS HIDE -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-15">
+<section class="slide" id="slide-16">
 <div class="slide-inner" style="text-align:center">
   <h2 class="anim-hidden" data-anim="up">Where Can <span class="accent">Secrets</span> Hide?</h2>
   <p class="anim-hidden" data-anim="up" style="margin:0 auto 30px;text-align:center">Four main hiding spots forensic investigators check:</p>
@@ -967,9 +1004,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 16: CTF METHODOLOGY -->
+<!-- SLIDE 17: CTF METHODOLOGY -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-16">
+<section class="slide" id="slide-17">
 <div class="slide-inner">
   <h2 class="anim-hidden" data-anim="up">CTF Investigation <span class="accent">Methodology</span></h2>
   <p class="anim-hidden" data-anim="up" style="margin-bottom:20px">Follow this pipeline on <strong class="highlight">every stego challenge</strong>:</p>
@@ -1003,9 +1040,9 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SLIDE 17: CTA -->
+<!-- SLIDE 18: CTA -->
 <!-- ═══════════════════════════════════════ -->
-<section class="slide" id="slide-17">
+<section class="slide" id="slide-18">
 <div class="slide-inner" style="text-align:center">
   <div class="anim-hidden-scale" data-anim="scale">
     <!-- Unlock SVG -->
@@ -1037,7 +1074,7 @@ p{color:var(--text2);font-size:1rem;max-width:700px}
 gsap.registerPlugin(TextPlugin);
 
 // ─── STATE ───
-const TOTAL = 18;
+const TOTAL = 19;
 let current = 0;
 let transitioning = false;
 let lsbStep = 0;
@@ -1063,7 +1100,7 @@ const animatedSlides = new Set();
 })();
 
 // ─── DOT NAV ───
-const dotLabels = ['Hero','Steganography','File Anatomy','Extensions','file','strings','exiftool','xxd','Demo','LSB Method','steghide','binwalk','zsteg','Demo','Audio Stego','Hiding Spots','Methodology','Challenge'];
+const dotLabels = ['Hero','Steganography','File Anatomy','Extensions','Hidden Files','file','strings','exiftool','xxd','Demo','LSB Method','steghide','binwalk','zsteg','Demo','Audio Stego','Hiding Spots','Methodology','Challenge'];
 (function initDots() {
   const nav = document.getElementById('dotNav');
   for (let i = 0; i < TOTAL; i++) {
@@ -1110,7 +1147,7 @@ function goToSlide(n) {
   const inSlide = slides[n];
 
   // Reset sub-steps when leaving slides
-  if (current === 9) lsbStep = 0;
+  if (current === 10) lsbStep = 0;
   if (current === 3) extStep = 0;
 
   // Kill all GSAP tweens on the outgoing slide to avoid conflicts
@@ -1150,7 +1187,7 @@ function nextSlide() {
     return;
   }
   // Handle LSB sub-steps
-  if (current === 9 && lsbStep < LSB_STEPS - 1) {
+  if (current === 10 && lsbStep < LSB_STEPS - 1) {
     lsbStep++;
     showLsbStep(lsbStep);
     return;
@@ -1166,7 +1203,7 @@ function prevSlide() {
     return;
   }
   // Handle LSB sub-steps backwards
-  if (current === 9 && lsbStep > 0) {
+  if (current === 10 && lsbStep > 0) {
     lsbStep--;
     showLsbStep(lsbStep);
     return;
@@ -1386,7 +1423,7 @@ const slideAnimations = {
     showExtStep(0);
     animateGenericElements(slide);
   },
-  9: function(slide) {
+  10: function(slide) {
     // LSB: show first step
     lsbStep = 0;
     showLsbStep(0);
@@ -1398,13 +1435,13 @@ const slideAnimations = {
     const zp = document.getElementById('zoomedPixel');
     if (zp) zp.style.background = 'rgb(210,180,76)';
   },
-  14: function(slide) {
+  15: function(slide) {
     // Audio: draw waveform, reveal flag
     animateGenericElements(slide);
     gsap.to(slide.querySelector('.spectro-wave'), { strokeDashoffset: 0, duration: 2, delay: 0.5, ease: 'power2.inOut' });
     gsap.to(slide.querySelector('.spectro-flag'), { opacity: 0.7, duration: 1, delay: 2.5, ease: 'power2.out' });
   },
-  16: function(slide) {
+  17: function(slide) {
     // Pipeline: light up nodes sequentially
     animateGenericElements(slide);
     const nodes = slide.querySelectorAll('.pipeline-node');
@@ -1416,7 +1453,7 @@ const slideAnimations = {
       gsap.to(a, { className: '+=lit', duration: 0.01, delay: 1.65 + i * 0.3 });
     });
   },
-  17: function(slide) {
+  18: function(slide) {
     // CTA: draw lock, then unlock
     animateGenericElements(slide);
     const body = slide.querySelector('.cta-lock-body');
