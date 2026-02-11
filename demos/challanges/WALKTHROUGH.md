@@ -321,12 +321,61 @@ khana{d33p_c4v3_expl0r3r}
 
 ---
 
+## Challenge 6: `rickroll.wav` — "Never Gonna Give You Up"
+**Difficulty:** Medium | **Points:** 250
+**Tool:** `strings`, Audacity / Sonic Visualiser (spectrogram)
+
+> We intercepted an audio transmission from a suspect's burner phone.
+> At first it just sounds like a familiar song — but our analysts believe
+> there's more to it than meets the ear.
+
+### Step 1: Listen to the file
+
+```bash
+$ open rickroll.wav
+```
+
+It's "Never Gonna Give You Up" by Rick Astley. You just got rickrolled. But there's more...
+
+### Step 2: Check for string hints
+
+```bash
+$ strings rickroll.wav | grep -i hint
+--- HINT ---
+The flag is hidden where your ears cannot reach. Try viewing the spectrogram.
+--- END ---
+```
+
+The hint says to view the spectrogram — the frequency representation of the audio.
+
+### Step 3: Open in Audacity or Sonic Visualiser
+
+Open the file in Audacity:
+1. **File → Open** → select `rickroll.wav`
+2. Click the track name dropdown (▼) → **Spectrogram**
+3. Look at the **14–20 kHz range** (top of the spectrogram)
+
+You'll see the flag written in the high frequencies:
+
+```
+khana{sp3ctr0gr4m_r1ckr0ll}
+```
+
+The text is embedded as sine waves at frequencies above human hearing range (~14–20kHz), making it invisible to the ear but clearly visible on a spectrogram display.
+
+**Flag:** `khana{sp3ctr0gr4m_r1ckr0ll}`
+
+**Lesson:** Audio steganography can hide data in frequencies humans can't hear. Spectrogram analysis is a key tool in audio forensics — it reveals patterns in the frequency domain that are completely invisible when just listening. This technique is used in real-world CTFs and has been found in actual malware communications.
+
+---
+
 ## All Flags
 
 | # | File | Difficulty | Points | Tool(s) | Flag |
 |---|------|-----------|--------|---------|------|
 | 1 | `suspicious.pdf` | Easy | 50 | `file`, `exiftool` | `khana{f1l3_typ3s_c4nt_h1d3}` |
-| 2 | `linus.jpg` | Easy | 75 | `binwalk` | `khana{b1nw4lk_c4rv3s_s3cr3ts}` |
+| 2 | `linus.jpg` | Easy | 75 | `binwalk`, `ls -la` | `khana{b1nw4lk_c4rv3s_s3cr3ts}` |
 | 3 | `creation.png` | Easy | 150 | `zsteg` | `khana{z5t3g_p1x3l_m4st3r}` |
 | 4 | `gamer_cat.jpg` | Medium | 300 | `exiftool` + ROT13 + `binwalk` + `unzip` | `khana{l4y3r3d_f0r3ns1cs_pr0}` |
 | 5 | `deep_cave.jpg` | Hard | 500 | `exiftool` + `strings` + hex + `steghide` + `git` | `khana{d33p_c4v3_expl0r3r}` |
+| 6 | `rickroll.wav` | Medium | 250 | `strings` + spectrogram viewer | `khana{sp3ctr0gr4m_r1ckr0ll}` |

@@ -55,3 +55,12 @@ Hint: Sometimes things are rotated.
 **Flag:** `khana{d33p_c4v3_expl0r3r}`
 
 You found this image on an old hard drive buried in a Minecraft world backup. Whoever left it behind covered their tracks — wiped files, scrubbed data, erased every trace. But they made one mistake. Nothing is ever truly deleted. Dig deep enough and you'll find what they tried to hide.
+
+---
+
+## 6. Never Gonna Give You Up
+**File:** `rickroll.wav`
+**Difficulty:** Medium | **Points:** 250
+**Flag:** `khana{sp3ctr0gr4m_r1ckr0ll}`
+
+We intercepted an audio transmission from a suspect's burner phone. At first it just sounds like a familiar song — but our analysts believe there's more to it than meets the ear. Sometimes secrets hide in frequencies humans can't hear. You'll need to see the sound, not just listen to it.
